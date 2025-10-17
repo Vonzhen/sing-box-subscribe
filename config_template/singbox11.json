@@ -1,0 +1,2726 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "output": "",
+    "timestamp": false
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "Local-DNS",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "🎯 全球直连"
+      },
+      {
+        "tag": "Remote-DNS",
+        "address": "https://8.8.8.8/dns-query",
+        "detour": "🗽 节点选择"
+      }
+    ],
+    "rules": [
+      {
+        "action": "route",
+        "server": "Local-DNS",
+        "outbound": "any"
+      },
+      {
+        "action": "route",
+        "clash_mode": "direct",
+        "server": "Local-DNS"
+      },
+      {
+        "action": "route",
+        "clash_mode": "global",
+        "server": "Remote-DNS"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-CN"
+        ],
+        "server": "Local-DNS"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoLocation-!CN"
+        ],
+        "server": "Remote-DNS"
+      }
+    ],
+    "disable_cache": false,
+    "disable_expire": false,
+    "independent_cache": false,
+    "final": "Remote-DNS",
+    "strategy": "prefer_ipv4"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": false,
+      "stack": "mixed",
+      "platform": {
+        "http_proxy": {
+          "enabled": false,
+          "server": "127.0.0.1",
+          "server_port": 20122
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "🎯 全球直连"
+    },
+    {
+      "type": "selector",
+      "tag": "🗽 节点选择",
+      "outbounds": [
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-kitty",
+        "🇯🇵 JP-auto",
+        "🇺🇸 US-auto",
+        "🇬🇧Britian PSINet",
+        "🇳🇱Netherland Nova",
+        "🇳🇱Netherland Delux",
+        "🇰🇷Korea 01 Amazon",
+        "🇰🇷Korea 02 Amazon",
+        "🇰🇷Korea 03 Amazon",
+        "🇰🇷Korea 04 Amazon",
+        "🇩🇪 Germany 01 Amazon",
+        "🇩🇪 Germany 02 Amazon",
+        "🇩🇪 Germany 03 Frankfurt",
+        "马来西亚 01",
+        "马来西亚 02",
+        "马来西亚 03",
+        "马来西亚 04",
+        "马来西亚 05",
+        "土耳其 01",
+        "阿根廷 01",
+        "阿根廷 Nato 01",
+        "英国 Haruka 01",
+        "尼日利亚 Melbikomas 01",
+        "德国 Misaka 01",
+        "荷兰 Liteserver 01"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📺️ Streaming",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇺🇸 US-auto",
+        "🇯🇵 JP-auto",
+        "土耳其 01",
+        "阿根廷 01",
+        "阿根廷 Nato 01",
+        "尼日利亚 Melbikomas 01"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📺️ Hbo Max&Netflix",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇺🇸 US-auto",
+        "🇯🇵 JP-auto",
+        "土耳其 01",
+        "阿根廷 01",
+        "阿根廷 Nato 01",
+        "尼日利亚 Melbikomas 01"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📹️ Youtube",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇯🇵 JP-auto",
+        "🇺🇸 US-auto"
+       ]
+    },
+    {
+      "type": "selector",
+      "tag": "🌎 Google",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇯🇵 JP-auto",
+        "🇺🇸 US-auto"
+       ]
+    },
+    {
+      "type": "selector",
+      "tag": "🌀 Hamivideo",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🦚 PeacockTV",
+      "outbounds": [
+         "🗽 节点选择",
+        "🇺🇸 US-auto"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🛩️ Telegram",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇯🇵 JP-auto",
+        "🇺🇸 US-auto"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "💿 Spotify",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇯🇵 JP-auto",
+        "🇺🇸 US-auto"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📽️ TikTok",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇭🇰 HK-bocchi",
+        "🇭🇰 HK-totoro",
+        "🇭🇰 HK-kitty",
+        "🇹🇼 TW-bocchi",
+        "🇹🇼 TW-totoro",
+        "🇹🇼 TW-kitty",
+        "🇸🇬 SG-bocchi",
+        "🇸🇬 SG-totoro",
+        "🇸🇬 SG-kitty",
+        "🇯🇵 JP-auto",
+        "🇺🇸 US-auto"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🍎 Apple",
+      "outbounds": [
+        "🗽 节点选择",
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🅾️ OpenAI",
+      "outbounds": [
+        "🗽 节点选择",
+        "🇺🇸 US-auto"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🐟 漏网之鱼",
+      "outbounds": [
+        "🗽 节点选择"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🌐 GLOBAL",
+      "outbounds": [
+        "🗽 节点选择"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇭🇰 HK-bocchi",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "香港 HKT 01 ○",
+        "香港 BGP 02 ○",
+        "香港 BGP 03",
+        "香港 BGP 04",
+        "香港 BGP 05",
+        "香港 BGP 06",
+        "香港 HKT 07 ○",
+        "香港 HKT 08 ○"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇹🇼 TW-bocchi",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "台湾 HiNet 01 ○",
+        "台湾 HiNet 02 ○",
+        "台湾 Hinet 03 ○"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇸🇬 SG-bocchi",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "狮城 BGP 01",
+        "狮城 Eons 02"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇭🇰 HK-totoro",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "香港 01",
+        "香港 02",
+        "香港 03",
+        "香港 04",
+        "香港 05",
+        "香港 06",
+        "香港 07",
+        "香港 08",
+        "香港 09",
+        "香港 10",
+        "香港 11",
+        "香港 12",
+        "香港 13",
+        "香港 14",
+        "香港 15",
+        "香港 16",
+        "香港 17",
+        "香港 18",
+        "香港 19",
+        "香港 20"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇸🇬 SG-totoro",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "新加坡 01",
+        "新加坡 02",
+        "新加坡 03",
+        "新加坡 04",
+        "新加坡 05",
+        "新加坡 06",
+        "新加坡 07",
+        "新加坡 08",
+        "新加坡 09",
+        "新加坡 10"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇹🇼 TW-totoro",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "台湾 01",
+        "台湾 02",
+        "台湾 03",
+        "台湾 04",
+        "台湾 05",
+        "台湾 06",
+        "台湾 07",
+        "台湾 08",
+        "台湾 09",
+        "台湾 10",
+        "SS-台湾 01",
+        "SS-台湾 02",
+        "SS-台湾 03",
+        "SS-台湾 04",
+        "SS-台湾 05"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇭🇰 HK-kitty",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "🇭🇰Hong Kong Telecom 01",
+        "🇭🇰Hong Kong Telecom 02"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇹🇼 TW-kitty",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "🇹🇼Taiwan Hinet",
+        "🇹🇼Taiwan Hinet"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇸🇬 SG-kitty",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "🇸🇬Singapore 01 Amazon",
+        "🇸🇬Singapore 02 Amazon",
+        "🇸🇬Singapore 03 Amazon",
+        "🇸🇬Singapore 04 Amazon",
+        "🇸🇬Singapore 05 Amazon",
+        "🇸🇬Singapore 06 Amazon",
+        "🇸🇬Singapore 07 Amazon",
+        "🇸🇬Singapore 08 Amazon",
+        "🇸🇬Singapore 09 Amazon",
+        "🇸🇬Singapore 10 Amazon",
+        "🇸🇬Singapore 11 Amazon",
+        "🇸🇬Singapore 12 Amazon"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇯🇵 JP-auto",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "日本 BGP 01",
+        "日本 Eons 02",
+        "日本 Eons 03",
+        "日本 01",
+        "日本 02",
+        "日本 03",
+        "日本 04",
+        "日本 05",
+        "日本 06",
+        "日本 07",
+        "日本 08",
+        "日本 09",
+        "日本 10",
+        "🇯🇵Japan 01 Amazon",
+        "🇯🇵Japan 02 Amazon",
+        "🇯🇵Japan 03 Amazon",
+        "🇯🇵Japan 04 Amazon",
+        "🇯🇵Japan 05 Amazon",
+        "🇯🇵Japan 06 Amazon",
+        "🇯🇵Japan 07 Amazon",
+        "🇯🇵Japan 08 Amazon",
+        "🇯🇵Japan 09 Amazon",
+        "🇯🇵Japan 10 Amazon",
+        "🇯🇵Japan 11 Amazon",
+        "🇯🇵Japan 12 Amazon"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "🇺🇸 US-auto",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 250,
+      "outbounds": [
+        "US01-reality",
+        "US01-hysteria2",
+        "US02-reality",
+        "US02-hysteria2",
+        "🇺🇸America 01 West",
+        "🇺🇸America 02 San José",
+        "🇺🇸America 03 FranTech",
+        "🇺🇸America 04 Site",
+        "🇺🇸America 05 San José",
+        "美国 01",
+        "美国 02",
+        "美国 03",
+        "美国 04",
+        "美国 05",
+        "美国 06",
+        "美国 07",
+        "美国 08",
+        "美国 09",
+        "美国 10",
+        "美国 Eons 01",
+        "美国 Eons 02"
+      ]
+    },
+    {
+      "type": "vless",
+      "tag": "US01-reality",
+      "uuid": "d0bf7217-4e0d-4df8-89cc-d19859dbce4e",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "server": "159.54.167.57",
+      "server_port": 13485,
+      "tls": {
+        "enabled": true,
+        "server_name": "itunes.apple.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "tINopZsi6biES8W-AVoNw7cninieUQuoVCAPfuskex0",
+          "short_id": "46bcea4f5fa418b0"
+        }
+      }
+    },
+    {
+      "type": "hysteria2",
+      "server": "159.54.167.57",
+      "server_port": 17612,
+      "tag": "US01-hysteria2",
+      "up_mbps": 100,
+      "down_mbps": 100,
+      "password": "a463871f68eb6ac0",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "US02-reality",
+      "uuid": "b6a4907c-a9de-472f-9164-6885b77b4fd2",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "server": "192.9.246.90",
+      "server_port": 11797,
+      "tls": {
+        "enabled": true,
+        "server_name": "itunes.apple.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "bXA10vB84S0hyJ1GwvPExqUcrp6selZ1zDAGtQxbOA0",
+          "short_id": "7d67c550d2d76a19"
+        }
+      }
+    },
+    {
+      "type": "hysteria2",
+      "server": "192.9.246.90",
+      "server_port": 11657,
+      "tag": "US02-hysteria2",
+      "up_mbps": 100,
+      "down_mbps": 100,
+      "password": "c616572d1719f07c",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "🇺🇸America 01 West",
+      "type": "hysteria2",
+      "server": "us1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇺🇸America 02 San José",
+      "type": "hysteria2",
+      "server": "us2.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇺🇸America 03 FranTech",
+      "type": "hysteria2",
+      "server": "us3.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇺🇸America 04 Site",
+      "type": "hysteria2",
+      "server": "us4.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇺🇸America 05 San José",
+      "type": "hysteria2",
+      "server": "us5.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 01 Amazon",
+      "type": "hysteria2",
+      "server": "sg1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 02 Amazon",
+      "type": "hysteria2",
+      "server": "sg2.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 03 Amazon",
+      "type": "hysteria2",
+      "server": "sg3.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 04 Amazon",
+      "type": "hysteria2",
+      "server": "sg4.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 05 Amazon",
+      "type": "hysteria2",
+      "server": "sg5.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 06 Amazon",
+      "type": "hysteria2",
+      "server": "sg6.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 07 Amazon",
+      "type": "hysteria2",
+      "server": "sg7.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 08 Amazon",
+      "type": "hysteria2",
+      "server": "sg8.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 09 Amazon",
+      "type": "hysteria2",
+      "server": "sg9.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 10 Amazon",
+      "type": "hysteria2",
+      "server": "sg10.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 11 Amazon",
+      "type": "hysteria2",
+      "server": "sg11.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇸🇬Singapore 12 Amazon",
+      "type": "hysteria2",
+      "server": "sg12.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 01 Amazon",
+      "type": "hysteria2",
+      "server": "jp1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 02 Amazon",
+      "type": "hysteria2",
+      "server": "jp2.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 03 Amazon",
+      "type": "hysteria2",
+      "server": "jp3.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 04 Amazon",
+      "type": "hysteria2",
+      "server": "jp4.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 05 Amazon",
+      "type": "hysteria2",
+      "server": "jp5.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 06 Amazon",
+      "type": "hysteria2",
+      "server": "jp6.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 07 Amazon",
+      "type": "hysteria2",
+      "server": "jp7.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 08 Amazon",
+      "type": "hysteria2",
+      "server": "jp8.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 09 Amazon",
+      "type": "hysteria2",
+      "server": "jp9.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 10 Amazon",
+      "type": "hysteria2",
+      "server": "jp10.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 11 Amazon",
+      "type": "hysteria2",
+      "server": "jp11.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇯🇵Japan 12 Amazon",
+      "type": "hysteria2",
+      "server": "jp12.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇬🇧Britian PSINet",
+      "type": "hysteria2",
+      "server": "gb1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇳🇱Netherland Nova",
+      "type": "hysteria2",
+      "server": "nl1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇳🇱Netherland Delux",
+      "type": "hysteria2",
+      "server": "nl2.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇰🇷Korea 01 Amazon",
+      "type": "hysteria2",
+      "server": "kr1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇰🇷Korea 02 Amazon",
+      "type": "hysteria2",
+      "server": "kr2.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇰🇷Korea 03 Amazon",
+      "type": "hysteria2",
+      "server": "kr3.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇰🇷Korea 04 Amazon",
+      "type": "hysteria2",
+      "server": "kr4.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇭🇰Hong Kong Telecom 01",
+      "type": "hysteria2",
+      "server": "hk1.oomz.ru",
+      "server_port": 50000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇭🇰Hong Kong Telecom 02",
+      "type": "hysteria2",
+      "server": "hk2.oomz.ru",
+      "server_port": 50000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇹🇼Taiwan Hinet",
+      "type": "hysteria2",
+      "server": "tw.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇩🇪 Germany 01 Amazon",
+      "type": "hysteria2",
+      "server": "de1.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇩🇪 Germany 02 Amazon",
+      "type": "hysteria2",
+      "server": "de2.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇩🇪 Germany 03 Frankfurt",
+      "type": "hysteria2",
+      "server": "de3.oomz.ru",
+      "server_port": 30000,
+      "password": "dddd8bb8-d138-4b6a-b071-4cd015ad0e8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "香港 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53401,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 02",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53402,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 03",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53403,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 04",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53404,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 05",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53405,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 06",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53406,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 07",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53407,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 08",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53408,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 09",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53409,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 10",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53410,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 11",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53411,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 12",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53412,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 13",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53413,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 14",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53414,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 15",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53415,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 16",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53416,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 17",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53417,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 18",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53418,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 19",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53419,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "香港 20",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+      "server_port": 53420,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmhk.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53421,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 02",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53422,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 03",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53423,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 04",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53424,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 05",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53425,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 06",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53426,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 07",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53427,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 08",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53428,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 09",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53429,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "台湾 10",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+      "server_port": 53430,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtw.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53431,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 02",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53432,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 03",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53433,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 04",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53434,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 05",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53435,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 06",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53436,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 07",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53437,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 08",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53438,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 09",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53439,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "新加坡 10",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+      "server_port": 53440,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmsg.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53441,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 02",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53442,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 03",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53443,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 04",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53444,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 05",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53445,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 06",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53446,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 07",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53447,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 08",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53448,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 09",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53449,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "日本 10",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+      "server_port": 53450,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmjp.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53451,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 02",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53452,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 03",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53453,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 04",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53454,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 05",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53455,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 06",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53456,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 07",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53457,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 08",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53458,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 09",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53459,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "美国 10",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+      "server_port": 53460,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmus.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "马来西亚 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+      "server_port": 53466,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "马来西亚 02",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+      "server_port": 53467,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "马来西亚 03",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+      "server_port": 53468,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "马来西亚 04",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+      "server_port": 53469,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "马来西亚 05",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+      "server_port": 53470,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmmy.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "土耳其 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmtr.lma1b2.com",
+      "server_port": 53496,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmtr.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "阿根廷 01",
+      "type": "trojan",
+      "server": "lmnode-ixd3fh2v5uqlv3z-lmar.lma1b2.com",
+      "server_port": 53498,
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b",
+      "tls": {
+        "enabled": true,
+        "server_name": "lmnode-ixd3fh2v5uqlv3z-lmar.lma1b2.com",
+        "insecure": true,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "SS-台湾 01",
+      "type": "shadowsocks",
+      "server": "lmnode-f2302cc8.ixd3fh2v5uqlv3z-lmtw.lmsnodes.com",
+      "server_port": 50021,
+      "method": "aes-128-gcm",
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b"
+    },
+    {
+      "tag": "SS-台湾 02",
+      "type": "shadowsocks",
+      "server": "lmnode-f2302cc8.ixd3fh2v5uqlv3z-lmtw.lmsnodes.com",
+      "server_port": 50022,
+      "method": "aes-128-gcm",
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b"
+    },
+    {
+      "tag": "SS-台湾 03",
+      "type": "shadowsocks",
+      "server": "lmnode-f2302cc8.ixd3fh2v5uqlv3z-lmtw.lmsnodes.com",
+      "server_port": 50023,
+      "method": "aes-128-gcm",
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b"
+    },
+    {
+      "tag": "SS-台湾 04",
+      "type": "shadowsocks",
+      "server": "lmnode-f2302cc8.ixd3fh2v5uqlv3z-lmtw.lmsnodes.com",
+      "server_port": 50024,
+      "method": "aes-128-gcm",
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b"
+    },
+    {
+      "tag": "SS-台湾 05",
+      "type": "shadowsocks",
+      "server": "lmnode-f2302cc8.ixd3fh2v5uqlv3z-lmtw.lmsnodes.com",
+      "server_port": 50025,
+      "method": "aes-128-gcm",
+      "password": "562c4c54-7b6c-4621-93cc-aef21055479b"
+    },
+    {
+      "tag": "香港 HKT 01 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23001,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 BGP 02 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23002,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 BGP 03",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23003,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 BGP 04",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23004,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 BGP 05",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23005,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 BGP 06",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23006,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 HKT 07 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23007,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "香港 HKT 08 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23008,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "台湾 HiNet 01 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23011,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "台湾 HiNet 02 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23012,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "台湾 Hinet 03 ○",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23013,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "狮城 BGP 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23021,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "狮城 Eons 02",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23022,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "日本 BGP 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23031,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "日本 Eons 02",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23032,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "日本 Eons 03",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23033,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "美国 Eons 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23041,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "美国 Eons 02",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23042,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "阿根廷 Nato 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23051,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "英国 Haruka 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23052,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "尼日利亚 Melbikomas 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23053,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "德国 Misaka 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23054,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    },
+    {
+      "tag": "荷兰 Liteserver 01",
+      "type": "shadowsocks",
+      "server": "0d5a9626-906c-4fc0-a783-3fe90d4feb8f.palcloud.top",
+      "server_port": 23055,
+      "method": "aes-128-gcm",
+      "password": "94804a29-6022-49e9-9f67-dc8d44b944bc"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff",
+        "inbound": "tun-in"
+      },
+      {
+        "action": "hijack-dns",
+        "protocol": "dns"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "🌐 GLOBAL"
+      },
+      {
+        "action": "reject",
+        "protocol": "quic"
+      },
+      {
+        "action": "reject",
+        "rule_set": [
+          "Category-Ads"
+        ]
+      },
+      {
+        "rule_set": [
+          "GeoSite-CN",
+          "GeoSite-Private",
+          "GeoIP-Private",
+          "GeoIP-CN"
+        ],
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": [
+          "geosite-openai"
+        ],
+        "outbound": "🅾️ OpenAI"
+      },
+      {
+        "rule_set": [
+          "geosite-apple",
+          "geoip-apple"
+        ],
+        "outbound": "🍎 Apple"
+      },
+      {
+        "rule_set": [
+          "geosite-youtube"
+        ],
+        "outbound": "📹️ Youtube"
+      },
+      {
+        "rule_set": [
+          "geoip-google",
+          "geosite-google"
+        ],
+        "outbound": "🌎 Google"
+      },
+      {
+        "rule_set": [
+          "geosite-disney",
+          "geosite-primevideo"
+        ],
+        "outbound": "📺️ Streaming"
+      },
+      {
+         "rule_set": [
+          "geosite-hbo",
+          "geosite-netflix",
+          "geoip-netflix"
+        ],
+        "outbound": "📺️ Hbo Max&Netflix"
+      },
+      {
+        "rule_set": [
+          "geosite-PeacockTV"
+        ],
+        "outbound": "🦚 PeacockTV"
+      },
+      {
+        "rule_set": [
+          "geosite-hamivideo",
+          "geosite-hinet",
+          "geosite-hinet-eca"
+        ],
+        "outbound": "🌀 Hamivideo"
+      },
+      {
+        "rule_set": [
+          "geosite-spotify"
+        ],
+        "outbound": "💿 Spotify"
+      },
+      {
+        "rule_set": [
+          "geosite-tiktok"
+        ],
+        "outbound": "📽️ TikTok"
+      },
+      {
+        "rule_set": [
+          "geosite-telegram",
+          "geoip-telegram"
+        ],
+        "outbound": "🛩️ Telegram"
+      },
+      {
+        "rule_set": [
+          "GeoLocation-!CN"
+        ],
+        "outbound": "🗽 节点选择"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geoip-google",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geoip/google.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-google",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/google.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-spotify",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/spotify.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-tiktok",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/tiktok.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geoip-telegram",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geoip/telegram.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-telegram",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/telegram.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-disney",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/disney.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-primevideo",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/primevideo.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-openai",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/openai.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-netflix",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/netflix.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geoip-netflix",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geoip/netflix.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-hbo",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/hbo.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-hamivideo",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/hamivideo.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-hinet",
+        "type": "remote",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/hinet.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连",
+      },
+      {
+        "tag": "geosite-hinet-eca",
+        "type": "remote",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/hinet-eca.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-PeacockTV",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/nbcuniversal.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-youtube",
+        "type": "remote",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/blob/sing/geo/geosite/youtube.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geosite-apple",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/apple.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "geoip-apple",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geoip/apple.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "Category-Ads",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "GeoIP-Private",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "GeoSite-Private",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "GeoIP-CN",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "GeoSite-CN",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      },
+      {
+        "tag": "GeoLocation-!CN",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
+        "format": "binary",
+        "download_detour": "🎯 全球直连"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "🐟 漏网之鱼"
+    }    
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:20123",
+      "external_ui": "",
+      "external_ui_download_url": "",
+      "external_ui_download_detour": "🗽 节点选择",
+      "secret": "ID_mm8q8b8l",
+      "default_mode": "rule",
+      "access_control_allow_origin": [
+        "*"
+      ],
+      "access_control_allow_private_network": false
+    },
+    "cache_file": {
+      "enabled": true,
+      "path": "cache.db",
+      "cache_id": "",
+      "store_fakeip": true,
+      "store_rdrc": true,
+      "rdrc_timeout": "7d"
+    }
+  }
+}
